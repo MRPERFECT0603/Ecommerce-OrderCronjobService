@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: orderCronjobService
+  datasource:
+    url: jdbc:mysql://localhost:3306/order_services
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+order:
+  cron:
+    expression: "0 * * * * ?"
+    enabled: true
+
+  service:
+    base-url: "http://localhost:8002"
+    connect-timeout-ms: 3000
+    read-timeout-ms: 5000
