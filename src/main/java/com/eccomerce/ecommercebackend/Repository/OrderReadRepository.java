@@ -38,6 +38,6 @@ public class OrderReadRepository {
     public static class PendingOrder {
         private String orderId;
         private String userId;
-        private double orderValue;
+        private Double orderValue;
     }
 }

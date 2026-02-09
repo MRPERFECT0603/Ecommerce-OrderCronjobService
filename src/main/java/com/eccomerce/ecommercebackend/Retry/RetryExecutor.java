@@ -6,6 +6,8 @@ import com.eccomerce.ecommercebackend.Observabilities.RetryLogger;
 import com.eccomerce.ecommercebackend.repository.OrderReadRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class RetryExecutor {
 
@@ -33,7 +35,9 @@ public class RetryExecutor {
 
         for (var order : pendingOrders) {
             logger.logRetry(order.getOrderId());
-            client.retryCreateOrder(order.getUserId(), order.getOrderValue());
+            client.retryCreateOrder(
+                    order.getUserId(), order.getOrderValue()
+            );
         }
 
         logger.logCronEnd(pendingOrders.size());

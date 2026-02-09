@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.UUID;
+
 @Slf4j
 @Component
 public class OrderServiceClient {
@@ -14,10 +16,10 @@ public class OrderServiceClient {
         this.webClient = webClient;
     }
 
-    public void retryCreateOrder(String userId, double orderValue) {
+    public void retryCreateOrder(String userId, Double orderValue) {
 
         webClient.post()
-                .uri("/orders")
+                .uri("/order/")
                 .bodyValue(new CreateOrderRequest(userId, orderValue))
                 .retrieve()
                 .toBodilessEntity()
@@ -26,7 +28,8 @@ public class OrderServiceClient {
                 .doOnError(e ->
                         log.error("Retry request failed", e))
                 .subscribe(); // fire-and-forget
+
     }
 
-    record CreateOrderRequest(String userId, double orderValue) {}
+    record CreateOrderRequest(String userId, Double orderValue) {}
 }
